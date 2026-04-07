@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "754262930118",
+    "project_id": "elitehospitalmangementsystems",
+    "storage_bucket": "elitehospitalmangementsystems.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:754262930118:android:cf36a1ba1092ed0a2a1dc7",
+        "android_client_info": {
+          "package_name": "com.example.elitehospitalmangementsystem"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAhFxQY_YBwsERRGGFz21E_d0retJXqVwQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

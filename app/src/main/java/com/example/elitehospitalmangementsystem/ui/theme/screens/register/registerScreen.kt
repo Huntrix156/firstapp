@@ -1,0 +1,144 @@
+package com.example.elitehospitalmangementsystem.ui.theme.screens.register
+
+import android.R.attr.width
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.Lock
+import androidx.compose.material.icons.filled.Person
+import androidx.compose.material3.Button
+import androidx.compose.material3.Icon
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
+import com.example.elitehospitalmangementsystem.R
+import com.example.elitehospitalmangementsystem.navigation.ROUTE_LOGIN
+
+@Composable
+fun RegisterScreen(navController: NavController){
+    var username by remember { mutableStateOf( "") }
+    var email by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
+    var ConfirmPassword by remember {mutableStateOf("")}
+    var FirstName by remember { mutableStateOf("") }
+    var LastName by remember { mutableStateOf("") }
+
+    Box(modifier = Modifier
+        .fillMaxSize()
+    )
+    {Image(
+        painter = painterResource(id = R.drawable.background),
+        contentDescription = "logo",
+        contentScale = ContentScale.Crop,
+        modifier = Modifier
+//            .size(width = 300.dp, height = 300.dp)
+//            .clip(CircleShape)
+//            .border(2.dp, Color.White,)
+//            .shadow(4.dp, )
+                )
+
+    }
+    Column (
+        modifier = Modifier.fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center ) {
+        Image(painter = painterResource(id = R.drawable.audi),
+            contentDescription = "Logo",
+                )
+        Text(text="Register Here", fontSize = 32.sp,
+            fontWeight = FontWeight.Bold,
+            color = Color.White)
+        OutlinedTextField(
+            value = username,
+            onValueChange = {username = it},
+            label={Text(text="Enter Username")},
+            placeholder={Text(text="Please enter Username")},
+            leadingIcon = { Icon(Icons.Default.Person,contentDescription = null) }
+        )
+        OutlinedTextField(
+            value = email,
+            onValueChange = {email = it },
+            label = { Text(text = "Enter Email")},
+            placeholder={Text(text="Please enter Email")},
+            leadingIcon = { Icon(Icons.Default.Email,contentDescription = null) })
+        OutlinedTextField(
+            value = password,
+            onValueChange = {password = it},
+            label={Text(text ="Enter password")},
+            placeholder={Text(text="Please enter Password")},
+            leadingIcon = { Icon(Icons.Default.Lock,contentDescription = null) })
+
+        OutlinedTextField(
+            value= ConfirmPassword,
+            onValueChange = { ConfirmPassword = it },
+            label = {Text(text="ConfirmPassword")},
+            placeholder={Text(text="Please Confirm Password ")},
+            leadingIcon = { Icon(Icons.Default.Check,contentDescription = null) })
+
+        OutlinedTextField(
+            value = FirstName,
+            onValueChange = {FirstName = it},
+            label ={ Text(text="FirstName")},
+            placeholder={Text(text="Please enter FirstName")},
+            leadingIcon = { Icon(Icons.Default.Person,contentDescription = null) })
+
+
+        OutlinedTextField(
+            value= LastName,
+            onValueChange = { LastName=it },
+            label={Text(text="LastName")},
+            placeholder={Text(text="Please enter LastName ")},
+            leadingIcon = { Icon(Icons.Default.Person,contentDescription = null) })
+
+        Button(onClick ={},
+            modifier = Modifier
+                .fillMaxWidth()
+        )
+        {Text(text="Submit",
+            modifier = Modifier.clickable{navController.navigate(ROUTE_LOGIN)}) }
+        Row() {
+            Text(text = "Already Registered?",
+                color = Color.Green,)
+            Spacer(modifier = Modifier.width(5.dp))
+            Text(text = "Login Here",
+                color = Color.Blue)
+        }
+    }
+}
+
+@Preview(showBackground = true, showSystemUi = true)
+@Composable
+fun RegisterScreenPreview(){
+    RegisterScreen(rememberNavController())
+}
