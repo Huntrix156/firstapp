@@ -35,14 +35,17 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.elitehospitalmangementsystem.R
+import com.example.elitehospitalmangementsystem.data.AuthViewModel
 import com.example.elitehospitalmangementsystem.navigation.ROUTE_LOGIN
 
 @Composable
@@ -50,9 +53,11 @@ fun RegisterScreen(navController: NavController){
     var username by remember { mutableStateOf( "") }
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
-    var ConfirmPassword by remember {mutableStateOf("")}
-    var FirstName by remember { mutableStateOf("") }
-    var LastName by remember { mutableStateOf("") }
+    var confirmPassword by remember {mutableStateOf("")}
+//    var FirstName by remember { mutableStateOf("") }
+//    var LastName by remember { mutableStateOf("") }
+    val authViewModel: AuthViewModel=viewModel()  //this bring the login to the screen from the AuthViewModel
+    val context = LocalContext.current
 
     Box(modifier = Modifier
         .fillMaxSize()
@@ -73,14 +78,17 @@ fun RegisterScreen(navController: NavController){
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center ) {
+          //image
         Image(painter = painterResource(id = R.drawable.audi),
             contentDescription = "Logo",
                 )
+         //register text
         Text(text="Register Here", fontSize = 32.sp,
             fontWeight = FontWeight.Bold,
             color = Color.White)
         OutlinedTextField(
-            value = username,
+            value = username, // To be in the safe side this value should be the same with the one
+            // in both the UserModel and the  authViewModel
             onValueChange = {username = it},
             label={Text(text="Enter Username")},
             placeholder={Text(text="Please enter Username")},
@@ -100,28 +108,34 @@ fun RegisterScreen(navController: NavController){
             leadingIcon = { Icon(Icons.Default.Lock,contentDescription = null) })
 
         OutlinedTextField(
-            value= ConfirmPassword,
-            onValueChange = { ConfirmPassword = it },
+            value= confirmPassword,
+            onValueChange = { confirmPassword = it },
             label = {Text(text="ConfirmPassword")},
             placeholder={Text(text="Please Confirm Password ")},
             leadingIcon = { Icon(Icons.Default.Check,contentDescription = null) })
 
-        OutlinedTextField(
-            value = FirstName,
-            onValueChange = {FirstName = it},
-            label ={ Text(text="FirstName")},
-            placeholder={Text(text="Please enter FirstName")},
-            leadingIcon = { Icon(Icons.Default.Person,contentDescription = null) })
+//        OutlinedTextField(
+//            value = FirstName,
+//            onValueChange = {FirstName = it},
+//            label ={ Text(text="FirstName")},
+//            placeholder={Text(text="Please enter FirstName")},
+//            leadingIcon = { Icon(Icons.Default.Person,contentDescription = null) })
+//
+//
+//        OutlinedTextField(
+//            value= LastName,
+//            onValueChange = { LastName=it },
+//            label={Text(text="LastName")},
+//            placeholder={Text(text="Please enter LastName ")},
+//            leadingIcon = { Icon(Icons.Default.Person,contentDescription = null) })
 
-
-        OutlinedTextField(
-            value= LastName,
-            onValueChange = { LastName=it },
-            label={Text(text="LastName")},
-            placeholder={Text(text="Please enter LastName ")},
-            leadingIcon = { Icon(Icons.Default.Person,contentDescription = null) })
-
-        Button(onClick ={},
+        Button(onClick ={authViewModel.signup(          //calling the authViewModel
+            username=username,
+            email = email,
+            password= password,
+            confirmpassword = confirmPassword,
+            navController= navController,
+             context= context )},
             modifier = Modifier
                 .fillMaxWidth()
         )

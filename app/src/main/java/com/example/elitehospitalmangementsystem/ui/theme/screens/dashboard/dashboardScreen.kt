@@ -1,6 +1,6 @@
 package com.example.elitehospitalmangementsystem.ui.theme.screens.dashboard
 
-import android.R
+
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -25,6 +25,7 @@ import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SearchBarDefaults.colors
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
@@ -38,23 +39,30 @@ import androidx.compose.ui.layout.VerticalAlignmentLine
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DashboardScreen(){
+fun DashboardScreen(navController: NavController){
     val selectedItem = remember { mutableStateOf(0) }
     Scaffold(
         topBar = {TopAppBar(title = { Text(text="Medifest Hospital")},
             actions = {
-                Button(onClick = {}, colors = ButtonDefaults.buttonColors(
+                Button(onClick = {},
+                    colors = ButtonDefaults.buttonColors(
                     containerColor = Color.Red,
                     contentColor = Color.White
-                )) {Text("Logout") }) { }
-            }
+                )
+                )
+                {
+                    Text("Logout")
+                }
+            },
         colors = TopAppBarDefaults.topAppBarColors(
             containerColor = Color.Blue,
             titleContentColor = Color.White
-        ))},
+            ))},
         bottomBar = { NavigationBar(containerColor = Color.Black){
             NavigationBarItem(
                 selected = selectedItem.value == 0,
@@ -97,8 +105,12 @@ fun DashboardScreen(){
                 ) { Column(modifier = Modifier.fillMaxSize(),
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment= Alignment.CenterHorizontally) {
-                    Text(text = "120", color = Color.White, fontSize = 30.sp)
-                    Text(text = "Patients",color = Color.White, fontSize = 20.sp)
+                    Text(text = "120",
+                        color = Color.White,
+                        fontSize = 30.sp)
+                    Text(text = "Patients",
+                        color = Color.White,
+                        fontSize = 20.sp)
                 }}
                 Card(modifier = Modifier.size(100.dp),
 
@@ -108,8 +120,12 @@ fun DashboardScreen(){
                 ) { Column(modifier = Modifier.fillMaxSize(),
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment= Alignment.CenterHorizontally) {
-                    Text(text = "120", color = Color.White, fontSize = 30.sp)
-                    Text(text = "Patients",color = Color.White, fontSize = 20.sp)
+                    Text(text = "120",
+                        color = Color.White,
+                        fontSize = 30.sp)
+                    Text(text = "Patients",
+                        color = Color.White,
+                        fontSize = 20.sp)
                 }}
                 Card(modifier = Modifier.size(100.dp),
                     colors = CardDefaults.cardColors(  containerColor = Color.Blue),
@@ -118,32 +134,41 @@ fun DashboardScreen(){
                 ) { Column(modifier = Modifier.fillMaxSize(),
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment= Alignment.CenterHorizontally) {
-                    Text(text = "120", color = Color.White, fontSize = 30.sp)
-                    Text(text = "Patients",color = Color.White, fontSize = 20.sp)
+                    Text(text = "120",
+                        color = Color.White,
+                        fontSize = 30.sp)
+                    Text(text = "Patients",
+                        color = Color.White,
+                        fontSize = 20.sp)
                 }}
             }
             Card(onClick = { },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(vertical = 8.dp),
-                colors = CardDefaults.cardColors(containerColor = Color(0xFF1A2EFF),
-                    Color(0xFF3D5AFE)),
-                elevation = CardDefaults.cardElevation(6.dp),
+                colors = CardDefaults.cardColors(containerColor = Color(0xFF1A2EFF)),
+                elevation = CardDefaults.cardElevation(8.dp),
                 shape = RoundedCornerShape(16.dp))
             {
                 Row(modifier = Modifier
                     .padding(16.dp),
                     verticalAlignment = Alignment.CenterVertically) {
-                    Icon(Icons.Filled.Person,contentDescription = "Add Patients",
-                        tint = Color.White,
-                        modifier = Modifier.size(40.dp))
+                    //Icon
+                    Icon(Icons.Filled.Person,
+                        contentDescription = "Add Patients",
+                        tint = Color.Black,
+                        modifier = Modifier.size(40.dp)
+                    )
                     Spacer(modifier = Modifier.width(16.dp))
+                    //Text content
                     Column() {
                         Text(text= "Add Patients",
                         fontSize = 20.sp,
                         color = Color.Black)
                         Text("Add patient", fontSize = 18.sp, color = Color.Black)
-                    Text("Register new patient details", fontSize = 14.sp, color = Color.Black)}
+                    Text("Register new patient details",
+                        fontSize = 14.sp,
+                        color = Color.Black)}
                 }
 
             }
@@ -155,5 +180,5 @@ fun DashboardScreen(){
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun DashboardPreview(){
-    DashboardScreen()
+    DashboardScreen(rememberNavController())
 }
