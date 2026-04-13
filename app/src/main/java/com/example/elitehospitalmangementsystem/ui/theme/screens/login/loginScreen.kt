@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -30,6 +31,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Color.Companion.Green
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -38,6 +40,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.lint.kotlin.metadata.Visibility
 import androidx.navigation.NavHostController
@@ -57,7 +60,11 @@ fun LoginScreen(navController: NavHostController) {
     val authViewModel: AuthViewModel = viewModel()
 
 
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
 
+    ) {
     Image(
         painter = painterResource(id = R.drawable.login),
         contentDescription = "Background",
@@ -66,10 +73,7 @@ fun LoginScreen(navController: NavHostController) {
             .fillMaxSize()
     )
 
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-    ) {
+
 
         Column(
             modifier = Modifier.fillMaxSize(),
@@ -80,15 +84,11 @@ fun LoginScreen(navController: NavHostController) {
                 painter = painterResource(id = R.drawable.audi),
                 contentDescription = "logo"
             )
-            OutlinedTextField(
-                value = username,
-                onValueChange = { username = it },
-                label = { Text(text = "userName") }
-            )
             Text(
-                text = "Login",
-                modifier = Modifier
-                    .fillMaxWidth()
+                text = "Welcome Back",
+//                fontWeight= FontWeight.Bold,
+                fontSize = 50.sp, color =Color.Green
+//                modifier = Modifier
             )
             OutlinedTextField(
                 value = username,
@@ -123,12 +123,7 @@ fun LoginScreen(navController: NavHostController) {
                 }
             )
 
-            Row() {
 
-                Text(
-                    text = "Already Registered?",
-                    color = Color.Green,
-                )
                 Spacer(modifier = Modifier.width(5.dp))
                 Button(onClick = {
                     authViewModel.login(
@@ -140,17 +135,20 @@ fun LoginScreen(navController: NavHostController) {
                 },
                 modifier = Modifier.fillMaxWidth()
                 ) {Text(text = "Login", color = Color.White) }
+                Spacer(modifier = Modifier.height(16.dp))
+
                 Row() {
                     Text(
-                        text = "Dont Have an Account?", color = Color.White)
+                        text = "Don`t Have an Account?", color = Color.Green)
+                    Spacer(modifier = Modifier.width(5.dp))
                     Text(
-                        text = "Register Here",
+                        text = "Register Here", color = Color.Blue,
                         modifier = Modifier
                             .clickable { navController.navigate(ROUTE_REGISTER) }
                     )
                 }
 
-            }
+
         }
     }
 }

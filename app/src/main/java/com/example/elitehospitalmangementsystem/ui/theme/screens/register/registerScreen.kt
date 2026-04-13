@@ -58,8 +58,7 @@ fun RegisterScreen(navController: NavController){
     var password by remember { mutableStateOf("") }
     var confirmPassword by remember {mutableStateOf("")}
     var passwordVisible by remember { mutableStateOf(false) }
-//    var FirstName by remember { mutableStateOf("") }
-//    var LastName by remember { mutableStateOf("") }
+
     val authViewModel: AuthViewModel=viewModel()  //this bring the login to the screen from the AuthViewModel
     val context = LocalContext.current
 
@@ -149,20 +148,7 @@ fun RegisterScreen(navController: NavController){
             }
         }
         )
-//        OutlinedTextField(
-//            value = FirstName,
-//            onValueChange = {FirstName = it},
-//            label ={ Text(text="FirstName")},
-//            placeholder={Text(text="Please enter FirstName")},
-//            leadingIcon = { Icon(Icons.Default.Person,contentDescription = null) })
-//
-//
-//        OutlinedTextField(
-//            value= LastName,
-//            onValueChange = { LastName=it },
-//            label={Text(text="LastName")},
-//            placeholder={Text(text="Please enter LastName ")},
-//            leadingIcon = { Icon(Icons.Default.Person,contentDescription = null) })
+
 
         Button(onClick ={authViewModel.signup(          //calling the authViewModel
             username=username,

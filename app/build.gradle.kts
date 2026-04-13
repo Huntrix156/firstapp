@@ -62,6 +62,7 @@ dependencies {
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
-    implementation("androidx.compose.material:material-icons-extended")
-    implementation("androidx.navigation:navigation-compose:2.8.4")
+    implementation("androidx.compose.material:material-icons-extended") //This library provides a large collection of ready-made Material Design icons for Compose.//
+    implementation("androidx.navigation:navigation-compose:2.8.4") //This is the navigation system for Jetpack Compose apps.//
+    implementation("io.coil-kt:coil-compose:2.0.0")//for the rememberAsyncImagePainter
 }

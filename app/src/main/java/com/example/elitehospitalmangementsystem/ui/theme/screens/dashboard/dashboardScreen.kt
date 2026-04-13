@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -22,18 +23,24 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CheckboxDefaults.colors
+import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.ModalDrawerSheet
+import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationDrawerItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -45,6 +52,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.elitehospitalmangementsystem.data.AuthViewModel
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -52,6 +60,64 @@ fun DashboardScreen(navController: NavController){
     val selectedItem = remember { mutableStateOf(0) }
     val authViewModel: AuthViewModel = viewModel()
     val context = LocalContext.current
+
+
+
+    // Drawer state
+    val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
+    val scope = rememberCoroutineScope()
+
+    ModalNavigationDrawer(
+        drawerState = drawerState,
+        drawerContent = {
+            ModalDrawerSheet(
+
+                modifier = Modifier
+                    .fillMaxHeight()
+                    .fillMaxWidth(0.7f) // 👈 70% of screen (adjustable)
+            ) {
+
+                Text(
+                    text = "Medifest Menu",
+                    modifier = Modifier.padding(16.dp),
+                    fontSize = 20.sp
+                )
+
+                NavigationDrawerItem(
+                    label = { Text("Dashboard") },
+                    selected = false,
+                    onClick = { }
+                )
+
+                NavigationDrawerItem(
+                    label = { Text("Patients") },
+                    selected = false,
+                    onClick = { scope.launch { drawerState.close() }
+                        navController.navigate("patients") }
+                )
+
+                NavigationDrawerItem(
+                    label = { Text("Settings") },
+                    selected = false,
+                    onClick = { scope.launch { drawerState.close() }
+                        navController.navigate("settings")}
+                )
+
+                NavigationDrawerItem(
+                    label = { Text("Logout") },
+                    selected = false,
+                    onClick = {
+                        authViewModel.logout(navController, context)
+                    }
+                )
+            }
+        }
+    ) {
+
+
+
+
+
 
     Scaffold(
         topBar = {
@@ -193,6 +259,6 @@ fun DashboardScreen(navController: NavController){
 }
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
-fun DashboardPreview(){
+fun DashboardPreview() {
     DashboardScreen(rememberNavController())
-}
+}}
