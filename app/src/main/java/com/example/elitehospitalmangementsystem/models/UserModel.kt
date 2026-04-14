@@ -6,4 +6,4 @@ data class UserModel(
     val userId: String="",
     val phone: String=""
 
-)
+)//This is for the registration Screen

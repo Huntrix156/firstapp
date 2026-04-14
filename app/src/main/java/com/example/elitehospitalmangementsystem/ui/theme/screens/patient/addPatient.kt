@@ -33,11 +33,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import coil.compose.rememberAsyncImagePainter
+import com.example.elitehospitalmangementsystem.data.AuthViewModel
+import com.example.elitehospitalmangementsystem.data.PatientViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -52,6 +56,10 @@ fun AddPatientScreen(navController: NavController){
     var age by remember { mutableStateOf("") }
     var phone by remember { mutableStateOf("") }
     var illness by remember { mutableStateOf("") }
+
+    val patientViewModel: PatientViewModel=viewModel()  //this bring the patientviewmodel to the screen from the PatientViewModel
+    val context = LocalContext.current
+
     Scaffold(topBar = {
         TopAppBar(title = { Text(text="Add Patient") },
             colors = TopAppBarDefaults.topAppBarColors(
@@ -86,29 +94,49 @@ fun AddPatientScreen(navController: NavController){
             {
                 Text(text = "Select Image")
             }
-            OutlinedTextField(
+          OutlinedTextField(
                 value = name,
                 onValueChange = { name = it },
                 label = { Text(text = "Name") },
+                modifier = Modifier
+                    .fillMaxWidth()
                     )
 
             OutlinedTextField(
                 value = age,
                 onValueChange = { age = it },
-                label = { Text(text = "Age") }
+                label = { Text(text = "Age") },
+                modifier = Modifier
+                    .fillMaxWidth()
             )
             OutlinedTextField(
                 value = phone,
                 onValueChange = { phone = it },
-                label = { Text(text = "Phone") })
+                label = { Text(text = "Phone") },
+                modifier = Modifier
+                    .fillMaxWidth()
+            )
 
             OutlinedTextField(
                 value = illness,
                 onValueChange = { illness = it },
-                label = { Text(text = "Patient Illness") }
+                label = { Text(text = "Patient Illness") },
+                modifier = Modifier
+                    .fillMaxWidth()
             )
             Spacer(modifier = Modifier.height(16.dp))
-            Button(onClick = {}, modifier = Modifier.fillMaxWidth(),
+            Button(onClick = {
+                patientViewModel.uploadPatient(
+                    imageUri = imageUri,
+                    name = name,
+                    age = age,
+                    phone = phone,
+                    illness = illness,
+                    context=context,
+                    navController = navController
+                )
+
+            }, modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(10.dp))
             {
                 Text(text = "Save Patient")
