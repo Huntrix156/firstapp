@@ -56,6 +56,8 @@ fun AddPatientScreen(navController: NavController){
     var age by remember { mutableStateOf("") }
     var phone by remember { mutableStateOf("") }
     var illness by remember { mutableStateOf("") }
+    var gender by remember { mutableStateOf("") }
+    var date_of_visit by remember { mutableStateOf("") }
 
     val patientViewModel: PatientViewModel=viewModel()  //this bring the patientviewmodel to the screen from the PatientViewModel
     val context = LocalContext.current
@@ -124,6 +126,20 @@ fun AddPatientScreen(navController: NavController){
                 modifier = Modifier
                     .fillMaxWidth()
             )
+            OutlinedTextField(
+                value = gender,
+                onValueChange = { gender = it },
+                label = { Text(text = "Gender") },
+                modifier = Modifier
+                    .fillMaxWidth()
+            )
+            OutlinedTextField(
+                value = date_of_visit,
+                onValueChange = { date_of_visit = it },
+                label = { Text(text = "Date Of Visit") },
+                modifier = Modifier
+                    .fillMaxWidth()
+            )
             Spacer(modifier = Modifier.height(16.dp))
             Button(onClick = {
                 patientViewModel.uploadPatient(
@@ -132,6 +148,8 @@ fun AddPatientScreen(navController: NavController){
                     age = age,
                     phone = phone,
                     illness = illness,
+                    gender= gender,
+                    date_to_visit = date_of_visit,
                     context=context,
                     navController = navController
                 )

@@ -26,7 +26,7 @@ class PatientViewModel:ViewModel() {
     val cloudinaryUrl = "https://api.cloudinary.com/v1_1/dfuv2cguf/image/upload"//"https://api.cloudinary.com/v1_1/this come from cloudinary(Cloud name)/image/upload"
     val uploadPreset = "image_folder"//this is done  in the the cloudinary to the ((upload) in the setting)
 //    capturing patient details//
-    fun uploadPatient(imageUri: Uri?,name:String,age:String,phone:String,illness:String,
+    fun uploadPatient(imageUri: Uri?,name:String,age:String,phone:String,illness:String,gender: String,date_to_visit: String,
                       context: Context,navController: NavController){
 
         viewModelScope.launch (Dispatchers.IO){
@@ -39,7 +39,9 @@ class PatientViewModel:ViewModel() {
                     "age" to age,
                     "phone" to phone,
                     "illness" to illness,
-                    "imageUrl" to imageUrl
+                    "imageUrl" to imageUrl,
+                    "gender" to gender,
+                    "date_of_visit" to date_to_visit
                 )
                 ref.setValue(patientData).await()//Save function//
                 withContext(Dispatchers.Main){
