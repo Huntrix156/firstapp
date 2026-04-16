@@ -202,7 +202,7 @@ fun DashboardScreen(navController: NavController){
                     Text(text = "120",
                         color = Color.White,
                         fontSize = 30.sp)
-                    Text(text = "Patients",
+                    Text(text = "view Patients list",
                         color = Color.White,
                         fontSize = 20.sp)
                 }}
@@ -219,9 +219,11 @@ fun DashboardScreen(navController: NavController){
                     Text(text = "Patients",
                         color = Color.White,
                         fontSize = 20.sp)
+
                 }}
             }
-            Card(onClick = { },
+            Card(onClick = { navController.navigate("addpatient")
+        },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(vertical = 8.dp),

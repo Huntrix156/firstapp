@@ -94,8 +94,10 @@ fun RegisterScreen(navController: NavController){
             // in both the UserModel and the  authViewModel
             onValueChange = {username = it},
             label={Text(text="Enter Username")},
-            placeholder={Text(text="Please enter Username")},
-            leadingIcon = { Icon(Icons.Default.Person,contentDescription = null) }
+            placeholder={Text(text="Please enter Username",
+                         color= Color.Red)},
+            leadingIcon = { Icon(Icons.Default.Person,contentDescription = null) },
+
         )
         OutlinedTextField(
             value = email,
