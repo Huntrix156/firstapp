@@ -52,6 +52,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.elitehospitalmangementsystem.data.AuthViewModel
+import com.example.elitehospitalmangementsystem.navigation.ROUTE_LOGIN
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -222,7 +223,7 @@ fun DashboardScreen(navController: NavController){
 
                 }}
             }
-            Card(onClick = { navController.navigate("addpatient")
+            Card(onClick = { navController.navigate(ROUTE_LOGIN)
         },
             modifier = Modifier
                 .fillMaxWidth()
