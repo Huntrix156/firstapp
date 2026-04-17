@@ -52,7 +52,10 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.elitehospitalmangementsystem.data.AuthViewModel
+import com.example.elitehospitalmangementsystem.navigation.ROUTE_ADD_PATIENT
+import com.example.elitehospitalmangementsystem.navigation.ROUTE_DASHBOARD
 import com.example.elitehospitalmangementsystem.navigation.ROUTE_LOGIN
+import com.example.elitehospitalmangementsystem.navigation.ROUTE_PATIENT_LIST
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -223,7 +226,10 @@ fun DashboardScreen(navController: NavController){
 
                 }}
             }
-            Card(onClick = { navController.navigate(ROUTE_LOGIN)
+
+            Text(text="Quick Action")
+//Add patients card
+            Card(onClick = { navController.navigate(ROUTE_ADD_PATIENT)
         },
             modifier = Modifier
                 .fillMaxWidth()
@@ -251,6 +257,100 @@ fun DashboardScreen(navController: NavController){
                     Text("Register new patient details",
                         fontSize = 14.sp,
                         color = Color.Black)
+                    }
+                }
+
+            }
+
+            Card(onClick = { navController.navigate(ROUTE_ADD_PATIENT)
+            },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 8.dp),
+                colors = CardDefaults.cardColors(containerColor = Color(0xFF1A2EFF)),
+                elevation = CardDefaults.cardElevation(8.dp),
+                shape = RoundedCornerShape(16.dp))
+            {
+                Row(modifier = Modifier
+                    .padding(16.dp),
+                    verticalAlignment = Alignment.CenterVertically) {
+                    //Icon
+                    Icon(Icons.Filled.Person,
+                        contentDescription = "Add Patients",
+                        tint = Color.Black,
+                        modifier = Modifier.size(40.dp)
+                    )
+                    Spacer(modifier = Modifier.width(16.dp))
+                    //Text content
+                    Column() {
+                        Text(text= "Add New Staff",
+                            fontSize = 20.sp,
+                            color = Color.Black)
+                        Text("Register New Staff Details",
+                            fontSize = 14.sp,
+                            color = Color.Black)
+                    }
+                }
+
+            }
+            Card(onClick = { navController.navigate(ROUTE_PATIENT_LIST)
+            },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 8.dp),
+                colors = CardDefaults.cardColors(containerColor = Color(0xFF1A2EFF)),
+                elevation = CardDefaults.cardElevation(8.dp),
+                shape = RoundedCornerShape(16.dp))
+            {
+                Row(modifier = Modifier
+                    .padding(16.dp),
+                    verticalAlignment = Alignment.CenterVertically) {
+                    //Icon
+                    Icon(Icons.Filled.Person,
+                        contentDescription = "View Patients List",
+                        tint = Color.Black,
+                        modifier = Modifier.size(40.dp)
+                    )
+                    Spacer(modifier = Modifier.width(16.dp))
+                    //Text content
+                    Column() {
+                        Text(text= "View Patient List",
+                            fontSize = 20.sp,
+                            color = Color.Black)
+                        Text("Registered  Patient`s Details",
+                            fontSize = 14.sp,
+                            color = Color.Black)
+                    }
+                }
+
+            }
+            Card(onClick = { navController.navigate(ROUTE_DASHBOARD)
+            },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 8.dp),
+                colors = CardDefaults.cardColors(containerColor = Color(0xFF1A2EFF)),
+                elevation = CardDefaults.cardElevation(8.dp),
+                shape = RoundedCornerShape(16.dp))
+            {
+                Row(modifier = Modifier
+                    .padding(16.dp),
+                    verticalAlignment = Alignment.CenterVertically) {
+                    //Icon
+                    Icon(Icons.Filled.Person,
+                        contentDescription = "Add Patients",
+                        tint = Color.Black,
+                        modifier = Modifier.size(40.dp)
+                    )
+                    Spacer(modifier = Modifier.width(16.dp))
+                    //Text content
+                    Column() {
+                        Text(text= "Add Nurses",
+                            fontSize = 20.sp,
+                            color = Color.Black)
+                        Text("Register New Nurse Details",
+                            fontSize = 14.sp,
+                            color = Color.Black)
                     }
                 }
 
