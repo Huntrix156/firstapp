@@ -2,6 +2,7 @@ package com.example.elitehospitalmangementsystem.ui.theme.screens.register
 
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -10,6 +11,8 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
@@ -38,11 +41,17 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.airbnb.lottie.compose.LottieAnimation
+import com.airbnb.lottie.compose.LottieCompositionSpec
+import com.airbnb.lottie.compose.LottieConstants
+import com.airbnb.lottie.compose.animateLottieCompositionAsState
+import com.airbnb.lottie.compose.rememberLottieComposition
 import com.example.elitehospitalmangementsystem.R
 import com.example.elitehospitalmangementsystem.data.AuthViewModel
 import com.example.elitehospitalmangementsystem.navigation.ROUTE_LOGIN
@@ -65,30 +74,32 @@ fun RegisterScreen(navController: NavController){
     Box(modifier = Modifier
         .fillMaxSize()
     )
-    {Image(
-        painter = painterResource(id = R.drawable.background),
-        contentDescription = "logo",
-        contentScale = ContentScale.Crop,
-        modifier = Modifier
+    {
+//    Image(
+//        painter = painterResource(id = R.drawable.background),
+//        contentDescription = "logo",
+//        contentScale = ContentScale.Crop,
+//        modifier = Modifier
 //            .size(width = 300.dp, height = 300.dp)
 //            .clip(CircleShape)
 //            .border(2.dp, Color.White,)
 //            .shadow(4.dp, )
-                )
+//                )
 
     }
     Column (
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier.fillMaxWidth().padding(horizontal = 20.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center ) {
           //image
-        Image(painter = painterResource(id = R.drawable.audi),
-            contentDescription = "Logo",
-                )
+//        Image(painter = painterResource(id = R.drawable.audi),
+//            contentDescription = "Logo",
+//                )
+        LottieAnimationWidget(R.raw.kim, 100.dp)
          //register text
         Text(text="Register Here", fontSize = 32.sp,
             fontWeight = FontWeight.Bold,
-            color = Color.White)
+            color = Color.Blue)
         OutlinedTextField(
             value = username, // To be in the safe side this value should be the same with the one
             // in both the UserModel and the  authViewModel
@@ -181,4 +192,14 @@ fun RegisterScreen(navController: NavController){
 @Composable
 fun RegisterScreenPreview(){
     RegisterScreen(rememberNavController())
+}
+@Composable
+fun LottieAnimationWidget(lottiePath:Int,size: Dp) {
+    val composition by rememberLottieComposition(LottieCompositionSpec.RawRes(lottiePath))
+    val progress by animateLottieCompositionAsState(composition, iterations = LottieConstants.IterateForever)
+    LottieAnimation(
+        composition = composition,
+        progress = { progress },
+        modifier = Modifier.size(300.dp)
+    )
 }

@@ -1,6 +1,7 @@
 package com.example.elitehospitalmangementsystem.ui.theme.screens.login
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -11,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -23,6 +25,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -39,14 +42,21 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.lint.kotlin.metadata.Visibility
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.airbnb.lottie.compose.LottieAnimation
+import com.airbnb.lottie.compose.LottieCompositionSpec
+import com.airbnb.lottie.compose.LottieConstants
+import com.airbnb.lottie.compose.animateLottieCompositionAsState
+import com.airbnb.lottie.compose.rememberLottieComposition
 import com.example.elitehospitalmangementsystem.R
 import com.example.elitehospitalmangementsystem.data.AuthViewModel
+import com.example.elitehospitalmangementsystem.navigation.ROUTE_FORGOTPASSWORD
 import com.example.elitehospitalmangementsystem.navigation.ROUTE_LOGIN
 import com.example.elitehospitalmangementsystem.navigation.ROUTE_REGISTER
 
@@ -65,35 +75,37 @@ fun LoginScreen(navController: NavHostController) {
             .fillMaxSize()
 
     ) {
-    Image(
-        painter = painterResource(id = R.drawable.login),
-        contentDescription = "Background",
-        contentScale = ContentScale.Crop,
-        modifier = Modifier
-            .fillMaxSize()
-    )
+//    Image(
+//        painter = painterResource(id = R.drawable.login),
+//        contentDescription = "Background",
+//        contentScale = ContentScale.Crop,
+//        modifier = Modifier
+//            .fillMaxSize()
+//    )
 
 
 
         Column(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier.fillMaxSize().padding(horizontal = 20.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            Image(
-                painter = painterResource(id = R.drawable.audi),
-                contentDescription = "logo"
-            )
+//            Image(
+//                painter = painterResource(id = R.drawable.audi),
+//                contentDescription = "logo"
+//            )
             Text(
                 text = "Welcome Back",
 //                fontWeight= FontWeight.Bold,
-                fontSize = 50.sp, color =Color.Green
+                fontSize = 30.sp, color =Color.Green
 //                modifier = Modifier
             )
+            LottieAnimationWidget(R.raw.security, 100.dp)
+
             OutlinedTextField(
                 value = username,
                 onValueChange = { username = it },
-                label = { Text(text = "userName") })
+                label = { Text(text = "UserName") })
 
             OutlinedTextField(
                 value = Email,
@@ -108,7 +120,7 @@ fun LoginScreen(navController: NavHostController) {
             OutlinedTextField(
                 value = password,
                 onValueChange = { password = it },
-                label = { Text(text = "password") },
+                label = { Text(text = "Password") },
                 visualTransformation = if (passwordVisible)
                     VisualTransformation.None
                 else PasswordVisualTransformation(),
@@ -122,8 +134,12 @@ fun LoginScreen(navController: NavHostController) {
                     }
                 }
             )
-
-
+           //Forgot password
+            TextButton(onClick = {
+                navController.navigate(ROUTE_FORGOTPASSWORD)
+            }) {
+                Text("Forgot Password?")
+            }
                 Spacer(modifier = Modifier.width(5.dp))
                 Button(onClick = {
                     authViewModel.login(
@@ -163,6 +179,16 @@ fun LoginScreen(navController: NavHostController) {
 @Composable
 fun loginScreenpreview(){
     LoginScreen(navController= rememberNavController())
+}
+@Composable
+fun LottieAnimationWidget(lottiePath:Int,size: Dp) {
+    val composition by rememberLottieComposition(LottieCompositionSpec.RawRes(lottiePath))
+    val progress by animateLottieCompositionAsState(composition, iterations = LottieConstants.IterateForever)
+    LottieAnimation(
+        composition = composition,
+        progress = { progress },
+        modifier = Modifier.size(300.dp)
+    )
 }
 
 

@@ -41,6 +41,7 @@ android {
 }
 
 dependencies {
+    implementation("com.airbnb.android:lottie-compose:6.7.1")
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -52,9 +53,10 @@ dependencies {
     implementation(libs.firebase.auth)
     implementation(libs.firebase.database)
     implementation(libs.androidx.compose.animation.core.lint)
-    implementation(libs.androidx.compose.ui.text)
+//    implementation(libs.androidx.compose.ui.text)
     implementation(libs.androidx.material3)
-    implementation(libs.androidx.compose.foundation.layout)
+//    implementation(libs.androidx.compose.foundation.layout)
+//    implementation(libs.androidx.compose.foundation)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -65,4 +67,7 @@ dependencies {
     implementation("androidx.compose.material:material-icons-extended") //This library provides a large collection of ready-made Material Design icons for Compose.//
     implementation("androidx.navigation:navigation-compose:2.8.4") //This is the navigation system for Jetpack Compose apps.//
     implementation("io.coil-kt:coil-compose:2.0.0")//for the rememberAsyncImagePainter
+    implementation("com.google.firebase:firebase-auth:22.3.0")
+
+
 }
