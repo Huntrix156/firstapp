@@ -59,7 +59,7 @@ fun AddPatientScreen(navController: NavController){
     var gender by remember { mutableStateOf("") }
     var date_of_visit by remember { mutableStateOf("") }
 
-    val patientViewModel: PatientViewModel=viewModel()  //this bring the patientviewmodel to the screen from the PatientViewModel
+    val patientViewModel: PatientViewModel=viewModel()  //this bring the patient viewmodel to the screen from the PatientViewModel
     val context = LocalContext.current
 
     Scaffold(topBar = {

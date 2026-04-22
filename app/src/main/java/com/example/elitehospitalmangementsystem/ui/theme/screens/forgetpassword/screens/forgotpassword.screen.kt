@@ -16,8 +16,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavController
 import com.google.firebase.auth.FirebaseAuth
-//import androidx.compose.ui.text.input.KeyboardOptions
-import androidx.compose.ui.text.input.KeyboardType
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -69,9 +67,7 @@ fun ForgotPasswordScreen(navController: NavController) {
                 leadingIcon = {
                     Icon(Icons.Default.Email, contentDescription = "")
                 },
-//                keyboardOptions = androidx.compose.ui.text.input.KeyboardOptions(
-//                    keyboardType = KeyboardType.Email
-//                ),
+
                 modifier = Modifier.fillMaxWidth(),
                 singleLine = true,
                 shape = RoundedCornerShape(12.dp)

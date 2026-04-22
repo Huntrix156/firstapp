@@ -3,7 +3,6 @@ package com.example.elitehospitalmangementsystem.data
 
 
 //credintial functions
-import android.R.attr.text
 import android.content.Context
 import android.net.Uri
 import android.widget.Toast
@@ -14,6 +13,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
 import com.example.elitehospitalmangementsystem.models.PatientModel
 import com.example.elitehospitalmangementsystem.navigation.ROUTE_DASHBOARD
+import com.example.elitehospitalmangementsystem.navigation.ROUTE_PATIENT_LIST
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -30,8 +30,17 @@ class PatientViewModel:ViewModel() {
     val cloudinaryUrl = "https://api.cloudinary.com/v1_1/dfuv2cguf/image/upload"//"https://api.cloudinary.com/v1_1/this come from cloudinary(Cloud name)/image/upload"
     val uploadPreset = "image_folder"//this is done  in the cloudinary to the ((upload) in the setting)
 //    capturing patient details//
-    fun uploadPatient(imageUri: Uri?,name:String,age:String,phone:String,illness:String,gender: String,date_to_visit: String,
-                      context: Context,navController: NavController){
+
+    //--------UPLOAD A PATIENT--------//
+    fun uploadPatient(imageUri: Uri?,
+                      name:String,
+                      age:String,
+                      phone:String,
+                      illness:String,
+                      gender: String,
+                      date_of_visit: String,
+                      context: Context,
+                      navController: NavController){
 
         viewModelScope.launch (Dispatchers.IO){
             try {
@@ -45,7 +54,7 @@ class PatientViewModel:ViewModel() {
                     "illness" to illness,
                     "imageUrl" to imageUrl,
                     "gender" to gender,
-                    "date_of_visit" to date_to_visit
+                    "date_of_visit" to date_of_visit
                 )
                 ref.setValue(patientData).await()//Save function//
                 withContext(Dispatchers.Main){
@@ -60,7 +69,7 @@ class PatientViewModel:ViewModel() {
             }
         }
     }
-
+//------UPLOADING AN IMAGE TO CLOUDINARY-------//
     private fun uploadToCloudinary(context:Context,uri: Uri):String{
         val contentResolver = context.contentResolver
         val inputStream: InputStream? = contentResolver.openInputStream(uri)
@@ -84,6 +93,8 @@ class PatientViewModel:ViewModel() {
     private val _patients = mutableStateListOf<PatientModel>()
     val patients: List<PatientModel> = _patients
 
+
+//---------FETCH FUNCTION FOR PATIENTS-------//
     fun fetchPatient(context: Context){
 
         val ref = FirebaseDatabase.getInstance().getReference("Patients")
@@ -106,30 +117,60 @@ class PatientViewModel:ViewModel() {
         }
     }
 
+    //-----UPDATE PATIENT FUNCTION-------
+    fun updatePatient(patientId: String,
+                      imageUri: Uri?,
+                      name: String,
+                      age: String,
+                      phone: String,
+                      illness: String,
+                      gender: String,
+                      date_of_visit: String,
+                      context: Context,
+                      navController: NavController){
+        viewModelScope.launch ( Dispatchers.IO ){
+            try {
+                val imageUri = imageUri?.let { uploadToCloudinary(context,it) }
+                val updatePatient = mapOf(
+                    "id" to patientId,
+                    "name" to name,
+                    "age" to age,
+                    "phone" to phone,
+                    "illness" to illness,
+                    "gender" to gender,
+                    "date_of_visit" to date_of_visit,
+                    "imageUrl" to imageUri
+                 )
+
+
+                val ref = FirebaseDatabase.getInstance()
+                    .getReference("Patients")
+                    .child(patientId) // ✅ FIX: correct update path
+
+                ref.setValue( updatePatient).await() // ✅ FIX: actually update data
+
+                withContext(Dispatchers.Main){ // ✅ FIX: UI thread
+                    Toast.makeText(context,"Patient updated successfully",Toast.LENGTH_LONG).show()
+                    navController.navigate(ROUTE_PATIENT_LIST)
+                }
+
+
+
+//
+//                val ref = FirebaseDatabase.getInstance()
+//                    .getReference("Patients update successfully",
+//                        Toast.LENGTH_LONG).show()
+//                navController.navigate(ROUTE_PATIENT_LIST)
+
+        }catch (e: Exception){
+            withContext(Dispatchers.Main){
+                Toast.makeText(context,"Patient update failed",
+                    Toast.LENGTH_LONG).show()
+            }
+        }
+
+    }}}
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}

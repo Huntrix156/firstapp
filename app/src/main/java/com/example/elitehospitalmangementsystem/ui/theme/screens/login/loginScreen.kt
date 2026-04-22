@@ -56,7 +56,8 @@ import com.airbnb.lottie.compose.animateLottieCompositionAsState
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.example.elitehospitalmangementsystem.R
 import com.example.elitehospitalmangementsystem.data.AuthViewModel
-import com.example.elitehospitalmangementsystem.navigation.ROUTE_FORGOTPASSWORD
+import com.example.elitehospitalmangementsystem.navigation.ROUTE_FORGOT_PASSWORD
+import com.example.elitehospitalmangementsystem.navigation.ROUTE_FORGOT_PASSWORD
 import com.example.elitehospitalmangementsystem.navigation.ROUTE_LOGIN
 import com.example.elitehospitalmangementsystem.navigation.ROUTE_REGISTER
 
@@ -136,7 +137,7 @@ fun LoginScreen(navController: NavHostController) {
             )
            //Forgot password
             TextButton(onClick = {
-                navController.navigate(ROUTE_FORGOTPASSWORD)
+                navController.navigate(ROUTE_FORGOT_PASSWORD)
             }) {
                 Text("Forgot Password?")
             }
