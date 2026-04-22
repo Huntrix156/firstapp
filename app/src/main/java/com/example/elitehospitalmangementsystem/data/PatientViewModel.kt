@@ -38,7 +38,7 @@ class PatientViewModel:ViewModel() {
                       phone:String,
                       illness:String,
                       gender: String,
-                      date_of_visit: String,
+//                      date_of_visit: String,
                       context: Context,
                       navController: NavController){
 
@@ -54,7 +54,7 @@ class PatientViewModel:ViewModel() {
                     "illness" to illness,
                     "imageUrl" to imageUrl,
                     "gender" to gender,
-                    "date_of_visit" to date_of_visit
+//                    "date_of_visit" to date_of_visit
                 )
                 ref.setValue(patientData).await()//Save function//
                 withContext(Dispatchers.Main){
@@ -125,7 +125,7 @@ class PatientViewModel:ViewModel() {
                       phone: String,
                       illness: String,
                       gender: String,
-                      date_of_visit: String,
+//                      date_of_visit: String,
                       context: Context,
                       navController: NavController){
         viewModelScope.launch ( Dispatchers.IO ){
@@ -138,7 +138,7 @@ class PatientViewModel:ViewModel() {
                     "phone" to phone,
                     "illness" to illness,
                     "gender" to gender,
-                    "date_of_visit" to date_of_visit,
+//                    "date_of_visit" to date_of_visit,
                     "imageUrl" to imageUri
                  )
 
@@ -169,7 +169,9 @@ class PatientViewModel:ViewModel() {
             }
         }
 
-    }}}
+    }
+    }
+}
 
 
 

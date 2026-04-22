@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.LocalHospital
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -199,7 +200,7 @@ fun SplashScreen(navController: NavController) {
                 contentAlignment = Alignment.Center
             ) {
                 Icon(
-                    imageVector = Icons.Default.ShoppingCart,
+                    imageVector = Icons.Default.LocalHospital,
                     contentDescription = null,
                     tint = Color(0xFF6C63FF),
                     modifier = Modifier.size(56.dp)
@@ -210,7 +211,7 @@ fun SplashScreen(navController: NavController) {
 
             // App name
             Text(
-                text = "EliteHospitalManagement system",
+                text = "Elite system",
                 fontSize = 36.sp,
                 fontWeight = FontWeight.ExtraBold,
                 letterSpacing = 6.sp,
@@ -223,7 +224,7 @@ fun SplashScreen(navController: NavController) {
 
             // Tagline
             Text(
-                text = "Point of Sale System",
+                text = "We Are Here For You",
                 fontSize = 13.sp,
                 fontWeight = FontWeight.Light,
                 letterSpacing = 3.sp,

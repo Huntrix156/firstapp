@@ -149,7 +149,7 @@ fun AddPatientScreen(navController: NavController){
                     phone = phone,
                     illness = illness,
                     gender= gender,
-                    date_to_visit = date_of_visit,
+//                    date_to_visit = date_of_visit,
                     context=context,
                     navController = navController
                 )

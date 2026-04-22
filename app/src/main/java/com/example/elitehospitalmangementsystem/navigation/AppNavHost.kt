@@ -16,7 +16,7 @@ import com.example.elitehospitalmangementsystem.ui.theme.screens.register.Regist
 
 @Composable
 fun AppNavHost(navController: NavHostController= rememberNavController(),
-                startDestination:String = ROUTE_ADD_PATIENT){
+                startDestination:String = ROUTE_SPLASHSCREEN){
     NavHost(navController = navController,
         startDestination = startDestination){
         composable(ROUTE_REGISTER) {RegisterScreen(navController)}
