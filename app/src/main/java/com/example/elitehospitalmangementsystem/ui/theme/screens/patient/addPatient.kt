@@ -140,6 +140,7 @@ fun AddPatientScreen(navController: NavController){
                 modifier = Modifier
                     .fillMaxWidth()
             )
+
             Spacer(modifier = Modifier.height(16.dp))
             Button(onClick = {
                 patientViewModel.uploadPatient(

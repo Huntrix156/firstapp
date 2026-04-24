@@ -2,12 +2,11 @@ package com.example.elitehospitalmangementsystem.data
 
 
 
-//credintial functions
+//-------credentials functions---------//
 import android.content.Context
 import android.net.Uri
 import android.widget.Toast
 import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
@@ -154,14 +153,6 @@ class PatientViewModel:ViewModel() {
                     navController.navigate(ROUTE_PATIENT_LIST)
                 }
 
-
-
-//
-//                val ref = FirebaseDatabase.getInstance()
-//                    .getReference("Patients update successfully",
-//                        Toast.LENGTH_LONG).show()
-//                navController.navigate(ROUTE_PATIENT_LIST)
-
         }catch (e: Exception){
             withContext(Dispatchers.Main){
                 Toast.makeText(context,"Patient update failed",
@@ -171,6 +162,19 @@ class PatientViewModel:ViewModel() {
 
     }
     }
+
+    //--------Delete Function------------//
+    fun deletePatient(patientId: String,context: Context){
+        val ref = FirebaseDatabase.getInstance()
+            .getReference("Patients").child(patientId)
+        ref.removeValue().addOnSuccessListener {
+            _patients.removeAll{it.id == patientId}
+        }.addOnFailureListener {
+            Toast.makeText(context,"Patient Delete Failed",
+                Toast.LENGTH_LONG).show()
+        }
+    }
+
 }
 
 

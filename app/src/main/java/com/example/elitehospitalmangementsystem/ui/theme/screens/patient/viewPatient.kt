@@ -66,7 +66,7 @@ fun PatientListScreen(navController: NavController) {
         items(patients) { patient ->
             PatientCard(
                 patient = patient,
-                onDelete = {  },
+                onDelete = {patientId -> patientViewModel.deletePatient(patientId,context)},
                 navController = navController
             )
         }
